@@ -1,0 +1,333 @@
+/* ===== 基底重置 ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg-deep:       #07071a;
+  --bg-mid:        #0e0b2e;
+  --purple-dim:    #1a1040;
+  --purple-glow:   #7c3aed;
+  --pink-glow:     #ec4899;
+  --gold-glow:     #f59e0b;
+  --text-bright:   #f0ecff;
+  --text-soft:     rgba(240, 236, 255, 0.55);
+  --text-hint:     rgba(240, 236, 255, 0.25);
+  --font-serif:    'Noto Serif TC', serif;
+  --font-round:    'Zen Maru Gothic', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-deep);
+  color: var(--text-bright);
+  font-family: var(--font-round);
+  touch-action: none;
+}
+
+/* ===== 畫面管理 ===== */
+.screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s ease;
+  overflow: hidden;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ===== 開場畫面 ===== */
+#screen-opening {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
+}
+
+#canvas-opening {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.opening-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  padding: 0 32px;
+  animation: fadeInUp 1.4s ease both;
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.opening-day {
+  font-family: var(--font-round);
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: var(--text-hint);
+  text-transform: uppercase;
+}
+
+.opening-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-bright);
+  letter-spacing: 3px;
+}
+
+.opening-title .highlight {
+  font-weight: 500;
+  background: linear-gradient(135deg, #c4b5fd, #f9a8d4, #fde68a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.opening-sub {
+  font-size: 12px;
+  color: var(--text-hint);
+  letter-spacing: 2px;
+  margin-top: -8px;
+}
+
+.btn-start {
+  margin-top: 16px;
+  padding: 14px 36px;
+  border: 1px solid rgba(196, 181, 253, 0.3);
+  background: rgba(124, 58, 237, 0.1);
+  color: rgba(196, 181, 253, 0.9);
+  border-radius: 999px;
+  font-family: var(--font-round);
+  font-size: 14px;
+  letter-spacing: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(4px);
+}
+
+.btn-start:hover,
+.btn-start:active {
+  background: rgba(124, 58, 237, 0.25);
+  border-color: rgba(196, 181, 253, 0.6);
+  color: #e9d5ff;
+  transform: scale(1.04);
+}
+
+.btn-star {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* ===== 宇宙地圖畫面 ===== */
+#screen-universe {
+  background: var(--bg-deep);
+  overflow: hidden;
+  cursor: grab;
+}
+
+#screen-universe:active {
+  cursor: grabbing;
+}
+
+#canvas-universe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#universe-map {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+#universe-inner {
+  position: absolute;
+  height: 100%;
+  width: 1400px;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+/* ===== 星球 ===== */
+.planet-wrap {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.planet-body {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.planet-sphere {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.planet-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(70deg);
+  border-radius: 50%;
+  border-width: 3px;
+  border-style: solid;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.planet-glow-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: glowPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.6; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+.planet-label {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--text-soft);
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+/* 星球 hover 效果 */
+.planet-wrap:hover .planet-sphere {
+  transform: translate(-50%, -50%) scale(1.1);
+  filter: brightness(1.2);
+}
+
+.planet-wrap:hover .planet-ring {
+  transform: translate(-50%, -50%) rotateX(70deg) scale(1.1);
+}
+
+/* 星球出現動畫 */
+@keyframes planetAppear {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.2); filter: blur(8px); }
+  60%  { opacity: 1; transform: translate(-50%, -50%) scale(1.15); filter: blur(0); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1);   filter: blur(0); }
+}
+
+.planet-wrap.appearing {
+  animation: planetAppear 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ===== 流星 ===== */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ===== 提示文字 ===== */
+.universe-hint {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--text-hint);
+  letter-spacing: 3px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: hintFade 4s ease-in-out infinite;
+}
+
+@keyframes hintFade {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 0.7; }
+}
+
+/* ===== 返回按鈕 ===== */
+.btn-back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 8px 18px;
+  border: 1px solid rgba(196, 181, 253, 0.2);
+  background: rgba(10, 8, 30, 0.6);
+  color: rgba(196, 181, 253, 0.7);
+  border-radius: 999px;
+  font-family: var(--font-round);
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.btn-back:hover {
+  background: rgba(124, 58, 237, 0.2);
+  color: #e9d5ff;
+}
+
+/* ===== 星球內容畫面（暫時） ===== */
+#screen-planet {
+  background: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#planet-content {
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+/* ===== 滾動條隱藏 ===== */
+::-webkit-scrollbar { display: none; }

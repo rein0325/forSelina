@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>100天 · 宇宙之旅</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- 開場畫面 -->
+  <div id="screen-opening" class="screen active">
+    <canvas id="canvas-opening"></canvas>
+    <div class="opening-content">
+      <div class="opening-day">Day 100</div>
+      <div class="opening-title">我們已經一起走了<br><span class="highlight">100天</span></div>
+      <div class="opening-sub">這是一段只屬於我們的宇宙旅程</div>
+      <button class="btn-start" id="btn-start">
+        <span class="btn-star">✦</span>
+        開始旅程
+        <span class="btn-star">✦</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 宇宙地圖畫面 -->
+  <div id="screen-universe" class="screen">
+    <canvas id="canvas-universe"></canvas>
+    <div id="universe-map">
+      <div id="universe-inner">
+        <!-- 星球由 JS 動態產生 -->
+      </div>
+    </div>
+    <div class="universe-hint">← 滑動探索宇宙 →</div>
+  </div>
+
+  <!-- 各星球內容畫面（之後填入） -->
+  <div id="screen-planet" class="screen">
+    <div id="planet-content"></div>
+    <button class="btn-back" id="btn-back">← 返回宇宙</button>
+  </div>
+
+  <!-- 愛星：接愛心小遊戲 -->
+  <div id="screen-love-game" class="screen">
+    <canvas id="canvas-love-game" style="width:100%;height:100%;display:block;"></canvas>
+    <button class="btn-back" id="btn-back-love">← 返回宇宙</button>
+  </div>
+
+  <!-- 第100天：最終結局 -->
+  <div id="screen-ending" class="screen">
+    <canvas id="canvas-ending" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;"></canvas>
+  </div>
+
+  <!-- 相遇星：對話劇情 -->
+  <div id="screen-first-meet" class="screen">
+    <canvas id="canvas-first-meet" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;"></canvas>
+  </div>
+
+  <!-- 約會星：互動探索 -->
+  <div id="screen-dating" class="screen">
+    <canvas id="canvas-dating" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;"></canvas>
+  </div>
+
+  <!-- 許願星 -->
+  <div id="screen-wishing" class="screen">
+    <canvas id="canvas-wishing" style="position:absolute;top:0;left:0;width:100%;height:100%;display:block;"></canvas>
+  </div>
+
+  <script src="scenes/love-game/love-game.js"></script>
+  <script src="scenes/ending/ending.js"></script>
+  <script src="scenes/first-meet/first-meet.js"></script>
+  <script src="scenes/dating/dating.js"></script>
+  <script src="scenes/wishing/wishing.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
