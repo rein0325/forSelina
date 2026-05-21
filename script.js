@@ -389,8 +389,11 @@ function enterPlanet(planet) {
     if (currentFirstMeet) currentFirstMeet.destroy();
     showScreen('first-meet');
     const canvas = document.getElementById('canvas-first-meet');
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width  = window.innerWidth  * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width  = window.innerWidth  + 'px';
+    canvas.style.height = window.innerHeight + 'px';
     currentFirstMeet = FirstMeetScene;
     FirstMeetScene.init(canvas);
 

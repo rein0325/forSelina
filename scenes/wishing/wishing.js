@@ -46,6 +46,12 @@ const WishingScene = (() => {
   function init(canvasEl) {
     canvas = canvasEl;
     ctx    = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width  = window.innerWidth  * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width  = window.innerWidth  + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
     reset();
