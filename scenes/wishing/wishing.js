@@ -19,6 +19,7 @@ const WishingScene = (() => {
   let doneBtn = null;
   let wishCount = 0;
   let cardOpenTime = 0;
+  let dpr = 1;
 
   // 愛心形狀點位（參數方程）
   function heartPoints(count) {
@@ -35,10 +36,10 @@ const WishingScene = (() => {
 
   const MY_WISHES = [
     { emoji: '🌊', text: '想帶你去看海',              color: '#a5f3fc' },
-    { emoji: '🎂', text: '陪你過好多生日',             color: '#fde68a' },
+    { emoji: '🎂', text: '陪你過好多生日與節日',             color: '#fde68a' },
     { emoji: '🍚', text: '想吃寶寶做的飯',             color: '#6ee7b7' },
-    { emoji: '🌟', text: '未來有你',                   color: '#fcd34d' },
-    { emoji: '🤗', text: '想要你需要我時隨時給你抱抱',  color: '#c4b5fd' },
+    { emoji: '🌟', text: '未來一直都有你',                   color: '#fcd34d' },
+    { emoji: '🤗', text: '想要你需要我時隨時都能給你抱抱',  color: '#c4b5fd' },
     { emoji: '🗺️', text: '帶你去好多地方玩',           color: '#f9a8d4' },
   ];
 
@@ -46,14 +47,14 @@ const WishingScene = (() => {
   function init(canvasEl) {
     canvas = canvasEl;
     ctx    = canvas.getContext('2d');
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width  = window.innerWidth  * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width  = window.innerWidth  + 'px';
-    canvas.style.height = window.innerHeight + 'px';
+    dpr    = window.devicePixelRatio || 1;
+    W      = window.innerWidth;
+    H      = window.innerHeight;
+    canvas.width        = W * dpr;
+    canvas.height       = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
     reset();
     bindEvents();
     lastTime = performance.now();
