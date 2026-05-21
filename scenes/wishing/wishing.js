@@ -422,6 +422,7 @@ const WishingScene = (() => {
 
   /* ===== 繪圖 ===== */
   function draw() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
     drawBg();
     drawWishedStars();
