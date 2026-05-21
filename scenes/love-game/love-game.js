@@ -436,8 +436,8 @@ const LoveGame = (() => {
     const x = player.x;
     const y = player.y;
     const bobY = Math.sin(Date.now() * 0.003) * 3;
-    const imgW = 110;
-    const imgH = 140;
+    const imgW = W < 430 ? 80 : 110;  // 手機版縮小
+    const imgH = W < 430 ? 100 : 140;
 
     ctx.save();
 

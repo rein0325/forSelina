@@ -18,6 +18,7 @@ const WishingScene = (() => {
   let inputEl = null;
   let doneBtn = null;
   let wishCount = 0;
+  let cardOpenTime = 0;
 
   // 愛心形狀點位（參數方程）
   function heartPoints(count) {
@@ -118,7 +119,11 @@ const WishingScene = (() => {
   }
 
   function handleTap(x, y) {
-    if (activeCard !== null) { activeCard = null; return; }
+    if (activeCard !== null) {
+      if (Date.now() - cardOpenTime < 400) return;
+      activeCard = null;
+      return;
+    }
     if (phase !== 'catch') return;
 
     shooters.forEach(sh => {
@@ -127,6 +132,7 @@ const WishingScene = (() => {
       if (dist < 40) {
         sh.hit     = true;
         activeCard = sh.wish;
+        cardOpenTime = Date.now();
         cardAlpha  = 0;
         if (!caught.includes(sh.wish.text)) {
           caught.push(sh.wish.text);

@@ -191,7 +191,7 @@ const FirstMeetScene = (() => {
 
     const dialogH = 184;
     const availH  = H - dialogH;
-    const imgH    = availH * 0.88;
+    const imgH = Math.min(availH * 0.88, W * 0.72); // 手機版限制寬度
 
     // ── 宇憲（左側）──
     if (avatarYu && avatarYu.complete && avatarYu.naturalWidth > 0) {

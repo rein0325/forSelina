@@ -15,6 +15,7 @@ const DatingScene = (() => {
   let particles = [];
   let lastTime = 0;
   let sparkles = [];
+  let cardOpenTime = 0;
 
   const ITEMS = [
     {
@@ -134,6 +135,7 @@ const DatingScene = (() => {
   function handleTap(x, y) {
     // 如果有回憶卡片開著，點擊關掉
     if (activeMemory !== null) {
+      if (Date.now() - cardOpenTime < 400) return; // 400ms內不接受關閉
       activeMemory = null;
       return;
     }
@@ -158,6 +160,7 @@ const DatingScene = (() => {
           collected.push(item.id);
         }
         activeMemory = item;
+        cardOpenTime = Date.now();
         memoryAlpha  = 0;
 
         // 全部收集完

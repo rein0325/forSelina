@@ -422,6 +422,7 @@ function enterPlanet(planet) {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
     currentEnding = EndingScene;
+    EndingScene.reset();
     EndingScene.init(canvas);
 
   } else if (planet.id === 'love-game') {

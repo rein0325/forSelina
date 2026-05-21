@@ -248,6 +248,36 @@ const EndingScene = (() => {
         ctx.globalAlpha = 1;
       });
     }
+
+    // 文字完全顯示後，加入返回按鈕
+    if (textAlpha >= 1 && !document.getElementById('btn-back-universe')) {
+      const btn = document.createElement('button');
+      btn.id = 'btn-back-universe';
+      btn.textContent = '✦ 返回宇宙 ✦';
+      btn.style.cssText = `
+        position: fixed;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: transparent;
+        border: 1px solid rgba(196,181,253,0.6);
+        color: rgba(196,181,253,0.9);
+        font-family: 'Noto Serif TC', serif;
+        font-size: 15px;
+        padding: 10px 28px;
+        border-radius: 999px;
+        cursor: pointer;
+        letter-spacing: 2px;
+        transition: all 0.3s;
+      `;
+      btn.onmouseenter = () => btn.style.background = 'rgba(196,181,253,0.15)';
+      btn.onmouseleave = () => btn.style.background = 'transparent';
+      btn.onclick = () => {
+        destroy();
+        showScreen('universe');
+      };
+      document.body.appendChild(btn);
+    }
   }
 
   /* ===== 工具 ===== */
@@ -261,6 +291,8 @@ const EndingScene = (() => {
   /* ===== 清除 ===== */
   function destroy() {
     cancelAnimationFrame(animRaf);
+    const btn = document.getElementById('btn-back-universe'); // ← 加這兩行
+    if (btn) btn.remove();
   }
 
   return { init, destroy, reset };
