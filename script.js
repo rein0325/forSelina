@@ -294,8 +294,12 @@ function animatePlanets() {
   const t = performance.now();
   const H = window.innerHeight;
 
-  planetCanvas.width  = INNER_W;
-  planetCanvas.height = H;
+  const dpr = window.devicePixelRatio || 1;
+  planetCanvas.width  = INNER_W * dpr;
+  planetCanvas.height = H * dpr;
+  planetCanvas.style.width  = INNER_W + 'px';
+  planetCanvas.style.height = H + 'px';
+  planetCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
   planetCtx.clearRect(0, 0, INNER_W, H);
 
   PLANETS.slice(0, unlockedCount).forEach(p => {
